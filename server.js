@@ -3,15 +3,20 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
+
 app.use(express.json());
 
-// Load drafts safely
+// This line makes Express serve your website files from the public folder
+app.use(express.static("public"));
+
 const draftsPath = path.join(__dirname, "data", "drafts.json");
 
+// Homepage website
 app.get("/", (req, res) => {
-  res.send("AI Invoice Agent is running 🚀");
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// Draft invoices API
 app.get("/drafts", (req, res) => {
   try {
     const data = fs.readFileSync(draftsPath);
