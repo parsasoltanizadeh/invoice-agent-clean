@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Invoice Agent</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      padding: 30px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 900px;
+      margin: auto;
+    }
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #4CAF50;
+      color: white;
+    }
+    pre {
+      background: #111;
+      color: #0f0;
+      padding: 15px;
+      border-radius: 8px;
+      overflow: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>AI Invoice Agent Dashboard 🚀</h1>
+    <p>Load and view invoice drafts</p>
+
+    <button onclick="loadDrafts()">Load Draft Invoices</button>
+
+    <h2>Drafts</h2>
+    <pre id="output">Click the button to load drafts...</pre>
+  </div>
+
+  <script>
+    async function loadDrafts() {
+      try {
+        const res = await fetch('/drafts');
+        const data = await res.json();
+        document.getElementById('output').textContent =
+          JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('output').textContent =
+          "Error loading drafts";
+      }
+    }
+  </script>
+</body>
+</html>
